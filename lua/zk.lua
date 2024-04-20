@@ -131,6 +131,9 @@ function M.edit(options, picker_options)
     if picker_options and picker_options.multi_select == false then
       notes = { notes }
     end
+    if config.options.cd_on_edit then
+      M.cd()
+    end
     for _, note in ipairs(notes) do
       vim.cmd("e " .. note.absPath)
     end
