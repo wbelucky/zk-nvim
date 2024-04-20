@@ -68,6 +68,10 @@ function M.new(options)
   api.new(options.notebook_path, options, function(err, res)
     assert(not err, tostring(err))
     if options and options.dryRun ~= true and options.edit ~= false then
+      if config.options.cd_on_edit then
+        M.cd()
+      end
+
       -- neovim does not yet support window/showDocument, therefore we handle options.edit locally
       vim.cmd("edit " .. res.path)
     end
